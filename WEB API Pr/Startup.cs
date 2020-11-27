@@ -19,7 +19,6 @@ namespace WebAPIApp
             string con = "Server=(localdb)\\mssqllocaldb;Database=usersdbstore;Trusted_Connection=True;";
             // устанавливаем контекст данных
             services.AddDbContext<UsersContext>(options => options.UseSqlServer(con));
-
             services.AddControllers(); // используем контроллеры без представлений
         }
 
@@ -27,12 +26,17 @@ namespace WebAPIApp
         {
             app.UseDeveloperExceptionPage();
 
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
+
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers(); // подключаем маршрутизацию на контроллеры
-            });
+                endpoints.MapControllers();
+            });
         }
+      
     }
+
 }
